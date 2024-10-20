@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جزء عم بصوت فيصل الهاجري </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; 
+            color: #8A2BE2; 
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.5)); 
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        .sura {
+            background-color: rgba(255, 255, 255, 0.1); 
+            border-radius: 8px;
+            box-shadow: 0 2px 40px rgba(38, 1, 39, 0.842);
+            margin: 20px auto;
+            padding: 15px;
+            width: 80%;
+            transition: transform 0.3s;
+        }
+
+        .sura:hover {
+            transform: scale(1.05);
+        }
+
+        button {
+            background-color: #191022;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #7A1E9A; 
+        }
+
+        audio {
+            display: none
+        }
+    </style>
+</head>
+<body>
+    <h1>جزء عم بصوت فيصل الهاجري </h1>
+    <div id="suras"></div>
+
+    <script>
+        const suras = [
+            { name: "الناس", audio: "SnapSave.io - سورة الناس _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الفلق", audio: "SnapSave.io - سورة الفلق _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الإخلاص", audio: "SnapSave.io - سورة الإخلاص _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "المسد", audio: "SnapSave.io - سورة المسد _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "النصر", audio: "SnapSave.io - سورة النصر _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الكافرون", audio: "SnapSave.io - سورة الكافرون_ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الكوثر", audio: "SnapSave.io - سورة الكوثر _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الماعون", audio: "SnapSave.io - سورة الماعون _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "قريش", audio: "SnapSave.io - سورة قريش _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الفيل", audio: "SnapSave.io - سورة الفيل _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "همزة", audio: "SnapSave.io - سورة الهمزة _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "العصر", audio: "SnapSave.io - سورة العصر _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "التكاثر", audio: "SnapSave.io - سورة التكاثر _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "القارعه", audio: "SnapSave.io - سورة القارعة _ القارئ فيصل الهاجري (128 kbps) (1).mp3" },
+            { name: "العاديات", audio: "SnapSave.io - سورة العاديات _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الزلزله", audio: "SnapSave.io - سورة الزلزلة _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "البينه", audio: "SnapSave.io - سورة البينة _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "القدر", audio: "SnapSave.io - سورة القدر _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "العلق", audio: "SnapSave.io - سورة العلق _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "التين", audio: "SnapSave.io - سورة التين _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الشرح", audio: "SnapSave.io - سورة الشرح _ القارئ فيصل الهاجري (128 kbps) (1).mp3" },
+            { name: "الضحى", audio: "SnapSave.io - سورة الضحى _ القارئ فيصل الهاجري (128 kbps) (1).mp3" },
+            { name: "الليل", audio: "SnapSave.io - سورة الليل _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الشمس", audio: "SnapSave.io - سورة الشمس _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "البلد", audio: "SnapSave.io - سورة البلد _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الفجر", audio: "SnapSave.io - سورة الفجر _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الغاشيه", audio: "SnapSave.io - سورة الغاشية _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الاعلى", audio: "SnapSave.io - سورة الأعلى _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الطارق", audio: "SnapSave.io - سورة الطارق _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "البروج", audio: "SnapSave.io - سورة البروج _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الانشقاق", audio: "SnapSave.io - سورة الإنشقاق _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "المطففين", audio: "SnapSave.io - سورة المطففين _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "الانفطار", audio: "SnapSave.io - سورة الإنفطار _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "التكوير", audio: "SnapSave.io - سورة التكوير _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "عبس", audio: "SnapSave.io - سورة عبس _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "النازعات", audio: "SnapSave.io - سورة النازعات _ القارئ فيصل الهاجري (128 kbps).mp3" },
+            { name: "النبأ", audio: "SnapSave.io - سورة النبأ _ القارئ فيصل الهاجري (128 kbps).mp3" }
+        ];
+
+        const surasContainer = document.getElementById('suras');
+        let currentAudio = null; 
+
+        suras.reverse().forEach(sura => {
+            const div = document.createElement('div');
+            div.className = 'sura';
+            div.innerHTML = `
+                <h3>${sura.name}</h3>
+                <button id="play-${sura.name}" onclick="toggleAudio('${sura.audio}', 'play-${sura.name}')">استمع</button>
+                <audio id="${sura.name}" src="${sura.audio}"></audio>
+            `;
+            surasContainer.appendChild(div);
+        });
+
+        function toggleAudio(audioPath, buttonId) {
+            const audio = new Audio(audioPath);
+
+            if (currentAudio && currentAudio.paused === false) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                document.getElementById(`play-${currentAudio.suraName}`).innerText = "استمع";
+            }
+
+            if (currentAudio && currentAudio.suraName === buttonId.split('-')[1]) {
+                audio.pause(); 
+                document.getElementById(buttonId).innerText = "استمع"; 
+                currentAudio = null; 
+            } else {
+                currentAudio = audio;
+                currentAudio.suraName = buttonId.split('-')[1]; 
+                currentAudio.play();
+                document.getElementById(buttonId).innerText = "إيقاف"; 
+            }
+        }
+    </script>
+</body>
+</html>
